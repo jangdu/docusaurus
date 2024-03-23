@@ -1,7 +1,6 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
-import sidebars from "./sidebars";
 
 const config: Config = {
   title: "jangdu",
@@ -16,10 +15,10 @@ const config: Config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
-  i18n: {
-    defaultLocale: "ko",
-    locales: ["ko", "en"],
-  },
+  // i18n: {
+  //   defaultLocale: "ko",
+  //   locales: ["ko", "en"],
+  // },
 
   presets: [
     [
@@ -27,17 +26,40 @@ const config: Config = {
       {
         docs: false,
         blog: {
-          showReadingTime: true,
-          routeBasePath: "/",
-
           blogTitle: "Jangdu blog!",
           blogDescription: "dev blog!",
           postsPerPage: "ALL",
           blogSidebarTitle: "Blog",
           blogSidebarCount: "ALL",
 
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          showReadingTime: false,
+          routeBasePath: "/",
+          sortPosts: "ascending", // "ascending" | "descending"
+          id: "blog",
+          tagsBasePath: "/tags",
+          path: "./blog",
+          include: ["**/*.{md,mdx}"],
+          exclude: [
+            "**/_*.{js,jsx,ts,tsx,md,mdx}",
+            "**/_*/**",
+            "**/*.test.{js,jsx,ts,tsx}",
+            "**/__tests__/**",
+          ],
+
+          feedOptions: {
+            type: "all",
+            copyright: `Copyright © ${new Date().getFullYear()} Jangdu's Blog`,
+            createFeedItems: async (params) => {
+              const { blogPosts, defaultCreateFeedItems, ...rest } = params;
+              return defaultCreateFeedItems({
+                // keep only the 10 most recent blog posts in the feed
+                blogPosts: blogPosts.filter((item, index) => index < 10),
+                ...rest,
+              });
+            },
+          },
+
+          editUrl: "https://github.com/jangdu/docusaurus/tree/main/",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -57,6 +79,9 @@ const config: Config = {
       // },
       items: [
         // { to: "/blog", label: "Blog", position: "left" },
+        // { to: "/", label: "All Posts", position: "left" },
+        { to: "/tags", label: "All Tags", position: "left" },
+
         {
           href: "https://github.com/jangdu",
           label: "GitHub",
@@ -64,6 +89,7 @@ const config: Config = {
         },
       ],
     },
+
     footer: {
       style: "dark",
       links: [
@@ -99,7 +125,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Jangdu's Blog, Inc. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Jangdu's Blog`,
     },
     prism: {
       theme: prismThemes.github,

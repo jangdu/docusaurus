@@ -53,6 +53,13 @@ const config: Config = {
     },
   ],
 
+  scripts: [
+    {
+      src: "https://www.googletagmanager.com/gtag/js?id=G-3ZK2V0X0EH",
+      async: true,
+    },
+  ],
+
   presets: [
     [
       "@docusaurus/preset-classic",

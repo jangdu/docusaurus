@@ -34,7 +34,7 @@ const config: Config = {
 
           showReadingTime: false,
           routeBasePath: "/",
-          sortPosts: "ascending", // "ascending" | "descending"
+          sortPosts: "descending", // "ascending" | "descending"
           id: "blog",
           tagsBasePath: "/tags",
           path: "./blog",

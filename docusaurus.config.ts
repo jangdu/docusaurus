@@ -69,6 +69,20 @@ const config: Config = {
   ],
 
   themeConfig: {
+    headTags: {
+      innerHtml: `
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-3ZK2V0X0EH"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3ZK2V0X0EH');
+      </script>
+      `,
+    },
+
     image:
       "https://res.cloudinary.com/dyhnnmhcf/image/upload/v1706710430/07FE9B2A-F875-4E4D-8E5E-C56DB3613C3A_1_105_c_ft7bhh.jpg",
     navbar: {

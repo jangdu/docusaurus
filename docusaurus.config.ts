@@ -23,7 +23,6 @@ const config: Config = {
       attributes: {
         type: "application/ld+json",
         src: "https://www.googletagmanager.com/gtag/js?id=G-3ZK2V0X0EH",
-        async: "true",
       },
     },
     {
@@ -63,6 +62,18 @@ const config: Config = {
   presets: [
     [
       "@docusaurus/preset-classic",
+      {
+        gtag: {
+          trackingID: "G-3ZK2V0X0EH",
+          anonymizeIP: true,
+        },
+      },
+      {
+        googleTagManager: {
+          containerId: "GTM-T9SX9HQG",
+        },
+      },
+
       {
         docs: false,
         blog: {
@@ -188,6 +199,16 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+
+  plugins: [
+    [
+      "vercel-analytics",
+      {
+        debug: true,
+        mode: "auto",
+      },
+    ],
+  ],
 };
 
 export default config;

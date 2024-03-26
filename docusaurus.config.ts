@@ -62,20 +62,16 @@ const config: Config = {
   presets: [
     [
       "@docusaurus/preset-classic",
+
       {
+        docs: false,
         gtag: {
           trackingID: "G-3ZK2V0X0EH",
           anonymizeIP: true,
         },
-      },
-      {
         googleTagManager: {
           containerId: "GTM-T9SX9HQG",
         },
-      },
-
-      {
-        docs: false,
         blog: {
           blogTitle: "Jangdu blog!",
           blogDescription: "dev blog!",
@@ -199,16 +195,6 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
-
-  plugins: [
-    [
-      "vercel-analytics",
-      {
-        debug: true,
-        mode: "auto",
-      },
-    ],
-  ],
 };
 
 export default config;

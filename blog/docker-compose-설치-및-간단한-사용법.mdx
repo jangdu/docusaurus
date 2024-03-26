@@ -1,0 +1,120 @@
+---
+slug: docker-compose-설치-및-간단한-사용법
+title: docker-compose 설치 및 간단한 사용법
+description: docker-compose를 설치하는 방법 및 간단한 사용법에 대해 알아보겠습니다.
+authors: [jangdu]
+tags: [docker, docker-compose, 세팅]
+date: 2024-03-27
+---
+
+> **_docker-compose란?_** <br />
+> 여러 개의 컨테이너를 하나의 서비스로 구성하기 위한 도구이며,
+> docker-compose를 통해 여러 컨테이너를 생성, 실행을 자동화 및 관리할 수 있는
+> 기능을 제공합니다.<br/>
+> docker-compose의 명령어를 단순 나열해, 가독성이 떨어지는 부분이 많습니다.
+
+## docker-compose 설치하기
+
+**_[도커 설치 공식홈페이지](https://docs.docker.com/desktop/install/mac-install/)_**<br/>
+위 링크를 통해 도커를 설치하였다면, docker-compose를 설치할 필요가 없습니다.
+도커를 설치하였다면, docker-compose도 함께 설치되어 있습니다.
+
+.dmg 파일을 다운로드 받아 설치하면, docker-compose도 함께 설치됩니다.
+application에서 docker를 실행하면, docker-compose도 함께 실행됩니다.
+
+예전에는 `sudo curl -L "https://github.com/d 어쩌고~` 명령어를 통해 설치했지만,
+현재는 위 링크에서 docker를 설치하면 docker-compose도 함께 설치되어 있어 편리하게 사용할 수 있습니다.
+
+### docker-compose 버전 확인
+
+```bash title="docker-compose 버전 확인"
+> docker-compose --version
+```
+
+---
+
+## docker-compose 간단한 사용법 및 명령어들
+
+이제 간단하게 설치가 완료되었으니, docker-compose를 사용해보겠습니다
+
+도커를 사용 할 프로젝트에서 `docker-compose.yml` 파일을 만들어서 사용할 수 있습니다.
+
+```yml title="docker-compose.yml"
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=test
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+```
+
+### 실행
+
+```bash title="docker-compose 실행"
+> docker-compose up
+```
+
+위 명령어를 실행하면, `docker-compose.yml` 파일을 찾아서 컨테이너를 생성하고 실행합니다.
+
+```bash title="백그라운드에서 실행"
+> docker-compose up -d
+```
+
+`-d` 옵션을 주면, 백그라운드에서 실행됩니다.
+
+### 실행 확인
+
+```bash title="docker-compose 실행 확인"
+> docker-compose ps
+NAME                           IMAGE      COMMAND                   SERVICE   CREATED          STATUS         PORTS
+monorepo-nestjs-typeorm-db-1   postgres   "docker-entrypoint.s…"   db        20 minutes ago   Up 4 seconds   0.0.0.0:5432->5432/tcp
+```
+
+위 명령어를 실행하면, 현재 실행중인 컨테이너를 확인할 수 있습니다.
+위와 같이 나오면 정상적으로 실행이 된 것입니다.
+
+### 종료
+
+```bash title="docker-compose 종료"
+docker-compose down
+```
+
+위 명령어를 실행하면, `docker-compose.yml` 파일을 찾아서 컨테이너를 종료합니다.
+
+### 재시작
+
+```bash title="docker-compose 재시작"
+docker-compose restart
+```
+
+위 명령어를 실행하면, `docker-compose.yml` 파일을 찾아서 컨테이너를 재시작합니다.
+
+### 로그 확인
+
+```bash title="docker-compose 로그 확인"
+docker-compose logs
+```
+
+위 명령어를 실행하면, `docker-compose.yml` 파일을 찾아서 컨테이너의 로그를 확인할 수 있습니다.
+
+### 컨테이너에 접속
+
+```bash title="docker-compose 컨테이너에 접속"
+docker-compose exec db bash
+```
+
+위 명령어를 실행하면, `docker-compose.yml` 파일을 찾아서 컨테이너에 접속할 수 있습니다.
+
+### 컨테이너 삭제
+
+```bash title="docker-compose 컨테이너 삭제"
+docker-compose rm
+```
+
+위 명령어를 실행하면, `docker-compose.yml` 파일을 찾아서 컨테이너를 삭제할 수 있습니다.

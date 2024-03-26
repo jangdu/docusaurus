@@ -15,50 +15,6 @@ const config: Config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
-  clientModules: [require.resolve("./src/gtm.js")],
-
-  headTags: [
-    {
-      tagName: "script",
-      attributes: {
-        type: "application/ld+json",
-        src: "https://www.googletagmanager.com/gtag/js?id=G-3ZK2V0X0EH",
-      },
-    },
-    {
-      tagName: "script",
-      attributes: {
-        type: "application/ld+json",
-      },
-      innerHTML: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-3ZK2V0X0EH');
-            `,
-    },
-    {
-      tagName: "script",
-      attributes: {
-        type: "application/ld+json",
-      },
-      innerHTML: `
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-T9SX9HQG');
-      `,
-    },
-  ],
-
-  scripts: [
-    {
-      src: "https://www.googletagmanager.com/gtag/js?id=G-3ZK2V0X0EH",
-      async: true,
-    },
-  ],
-
   presets: [
     [
       "@docusaurus/preset-classic",
@@ -116,22 +72,6 @@ const config: Config = {
   ],
 
   themeConfig: {
-    bodyTags: [
-      {
-        tagName: "noScript",
-        attributes: {
-          type: "application/ld+json",
-        },
-        innerHTML: `
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-T9SX9HQG');
-        `,
-      },
-    ],
-
     image:
       "https://res.cloudinary.com/dyhnnmhcf/image/upload/v1706710430/07FE9B2A-F875-4E4D-8E5E-C56DB3613C3A_1_105_c_ft7bhh.jpg",
     navbar: {
@@ -156,15 +96,6 @@ const config: Config = {
     footer: {
       style: "dark",
       links: [
-        // {
-        //   title: "Docs",
-        //   items: [
-        //     {
-        //       label: "Tutorial",
-        //       to: "/docs/intro",
-        //     },
-        //   ],
-        // },
         {
           title: "Community",
           items: [

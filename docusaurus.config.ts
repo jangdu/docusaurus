@@ -31,7 +31,8 @@ const config: Config = {
         blog: {
           blogTitle: "Jangdu blog!",
           blogDescription: "dev blog!",
-          postsPerPage: "ALL",
+          postsPerPage: 10,
+
           blogSidebarTitle: "Blog",
           blogSidebarCount: "ALL",
 
@@ -84,6 +85,7 @@ const config: Config = {
         // { to: "/blog", label: "Blog", position: "left" },
         // { to: "/", label: "All Posts", position: "left" },
         { to: "/tags", label: "All Tags", position: "left" },
+        { to: "archive", label: "Archive", position: "left" },
 
         {
           href: "https://github.com/jangdu",

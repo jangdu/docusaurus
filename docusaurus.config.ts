@@ -1,57 +1,76 @@
-import { themes as prismThemes } from "prism-react-renderer";
-import type { Config } from "@docusaurus/types";
-import type * as Preset from "@docusaurus/preset-classic";
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: "jangdu",
-  tagline: "dev blog",
+  title: 'jangdu',
+  tagline: 'dev blog',
   favicon:
-    "https://res.cloudinary.com/dyhnnmhcf/image/upload/v1706710430/07FE9B2A-F875-4E4D-8E5E-C56DB3613C3A_1_105_c_ft7bhh.jpg",
-  url: "https://blog.jangdu.me",
-  baseUrl: "/",
-  organizationName: "jangdu", // Usually your GitHub org/user name.
-  projectName: "jangdu blog", // Usually your repo name.
+    'https://res.cloudinary.com/dyhnnmhcf/image/upload/v1706710430/07FE9B2A-F875-4E4D-8E5E-C56DB3613C3A_1_105_c_ft7bhh.jpg',
+  url: 'https://blog.jangdu.me',
+  baseUrl: '/',
+  organizationName: 'jangdu', // Usually your GitHub org/user name.
+  projectName: 'jangdu blog', // Usually your repo name.
 
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+
+  // plugins: [
+  //   [
+  //     '@docusaurus/plugin-content-docs',
+  //     {
+  //       id: 'node',
+  //       path: 'node',
+  //       routeBasePath: 'node',
+  //       sidebarPath: './sidebarsNode.ts',
+  //       // sidebarId: 'nodeSidebar',
+  //     },
+  //   ],
+  // ],
 
   presets: [
     [
-      "@docusaurus/preset-classic",
+      '@docusaurus/preset-classic',
 
       {
-        docs: false,
+        docs: {
+          sidebarPath: './sidebars.ts',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl:
+            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+        },
         gtag: {
-          trackingID: "G-3ZK2V0X0EH",
+          trackingID: 'G-3ZK2V0X0EH',
           anonymizeIP: true,
         },
         googleTagManager: {
-          containerId: "GTM-T9SX9HQG",
+          containerId: 'GTM-T9SX9HQG',
         },
         blog: {
-          blogTitle: "Jangdu blog!",
-          blogDescription: "dev blog!",
+          blogTitle: 'Jangdu blog!',
+          blogDescription: 'dev blog!',
           postsPerPage: 10,
 
-          blogSidebarTitle: "Blog",
-          blogSidebarCount: "ALL",
+          blogSidebarTitle: 'Blog',
+          blogSidebarCount: 'ALL',
 
           showReadingTime: false,
-          routeBasePath: "/",
-          sortPosts: "descending", // "ascending" | "descending"
-          id: "blog",
-          tagsBasePath: "/tags",
-          path: "./blog",
-          include: ["**/*.{md,mdx}"],
+          routeBasePath: '/blog',
+          sortPosts: 'descending', // "ascending" | "descending"
+          id: 'blog',
+          tagsBasePath: '/tags',
+          path: './blog',
+          include: ['**/*.{md,mdx}'],
           exclude: [
-            "**/_*.{js,jsx,ts,tsx,md,mdx}",
-            "**/_*/**",
-            "**/*.test.{js,jsx,ts,tsx}",
-            "**/__tests__/**",
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
           ],
 
           feedOptions: {
-            type: "all",
+            type: 'all',
             copyright: `Copyright © ${new Date().getFullYear()} Jangdu's Blog`,
             createFeedItems: async (params) => {
               const { blogPosts, defaultCreateFeedItems, ...rest } = params;
@@ -63,10 +82,10 @@ const config: Config = {
             },
           },
 
-          editUrl: "https://github.com/jangdu/docusaurus/tree/main/",
+          editUrl: 'https://github.com/jangdu/docusaurus/tree/main/',
         },
         theme: {
-          customCss: "./src/css/custom.css",
+          customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
     ],
@@ -74,49 +93,62 @@ const config: Config = {
 
   themeConfig: {
     image:
-      "https://res.cloudinary.com/dyhnnmhcf/image/upload/v1706710430/07FE9B2A-F875-4E4D-8E5E-C56DB3613C3A_1_105_c_ft7bhh.jpg",
+      'https://res.cloudinary.com/dyhnnmhcf/image/upload/v1706710430/07FE9B2A-F875-4E4D-8E5E-C56DB3613C3A_1_105_c_ft7bhh.jpg',
     navbar: {
-      title: "Jangdu Blog",
+      title: 'Jangdu Blog',
       // logo: {
       //   alt: "My Site Logo",
       //   src: "img/logo.svg",
       // },
       items: [
-        // { to: "/blog", label: "Blog", position: "left" },
+        {
+          type: 'docSidebar',
+          sidebarId: 'tutorialSidebar',
+          position: 'left',
+          label: 'Dev',
+        },
+
+        { to: '/blog', label: 'Blog', position: 'left' },
         // { to: "/", label: "All Posts", position: "left" },
-        { to: "/tags", label: "All Tags", position: "left" },
-        { to: "archive", label: "Archive", position: "left" },
+        { to: '/blog/tags', label: 'All Tags', position: 'left' },
+        { to: '/blog/archive', label: 'Archive', position: 'left' },
+        // {
+        //   to: '/node',
+        //   label: 'Node',
+        //   position: 'left',
+        //   sidebarId: 'nodeSidebar',
+        // },
 
         {
-          href: "https://github.com/jangdu",
-          label: "GitHub",
-          position: "right",
+          href: 'https://github.com/jangdu',
+          label: 'GitHub',
+          position: 'right',
         },
       ],
     },
 
     footer: {
-      style: "dark",
+      style: 'dark',
       links: [
         {
-          title: "Community",
+          title: 'Community',
           items: [
             {
-              label: "jjd0324@gmail.com",
-              href: "https://github.com/jangdu",
+              label: 'jjd0324@gmail.com',
+              href: 'https://github.com/jangdu',
             },
           ],
         },
         {
-          title: "More",
+          title: 'More',
           items: [
             {
-              label: "Blog",
-              to: "/",
+              label: 'Blog',
+              to: '/',
             },
             {
-              label: "GitHub",
-              href: "https://github.com/jangdu",
+              label: 'GitHub',
+              href: 'https://github.com/jangdu',
             },
           ],
         },

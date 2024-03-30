@@ -1,6 +1,6 @@
 ---
 slug: typeORM-0.3-custom-repository
-title: TypeORM 0.3에서 custom repository 사용하기
+title: TypeORM 0.3 custom repository
 description: EntityRepository() 데코레이터가 없어진 typeORM 0.3에서 커스텀 레포지토리를 사용하는 방법을 알아보자.
 authors: [jangdu]
 tags: [typeORM, nest.js]
@@ -37,7 +37,7 @@ export class UserRepository extends Repository<User> {
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: UserRepository
+    private userRepository: UserRepository,
   ) {}
 
   async findByName(name: string): Promise<User> {
@@ -60,7 +60,7 @@ export class UserService {
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
   ) {}
 
   async findByName(name: string): Promise<User> {
@@ -91,8 +91,8 @@ export class UserRepository extends Repository<User> {
   }
 
   async findByName(name: string): Promise<User> {
-    return this.createQueryBuilder("user")
-      .where("user.name = :name", { name })
+    return this.createQueryBuilder('user')
+      .where('user.name = :name', { name })
       .getOneOrFail();
   }
 }

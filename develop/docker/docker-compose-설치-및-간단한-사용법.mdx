@@ -43,13 +43,13 @@ application에서 docker를 실행하면, docker-compose도 함께 실행됩니�
 도커를 사용 할 프로젝트에서 `docker-compose.yml` 파일을 만들어서 사용할 수 있습니다.
 
 ```yml title="docker-compose.yml"
-version: "3.8"
+version: '3.8'
 
 services:
   db:
     image: postgres
     ports:
-      - "5432:5432"
+      - '5432:5432'
     environment:
       - POSTGRES_DB=test
       - POSTGRES_USER=test

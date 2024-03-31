@@ -85,13 +85,17 @@ Repository Layer를 생략하게 되어 Service Layer에서 Repository의 메소
 
 ```typescript title="user.repository.ts"
 @Injectable()
-export class UserRepository extends Repository<User> {
-  constructor(private dataSource: DataSource) {
-    super(User, dataSource.createEntityManager());
-  }
+export class UserRepository {
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+
+    private dataSource: DataSource,
+  ) {}
 
   async findByName(name: string): Promise<User> {
-    return this.createQueryBuilder('user')
+    return this.userRepository
+      .createQueryBuilder('user')
       .where('user.name = :name', { name })
       .getOneOrFail();
   }

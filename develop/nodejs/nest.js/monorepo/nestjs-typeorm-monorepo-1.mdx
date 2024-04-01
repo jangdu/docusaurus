@@ -19,7 +19,8 @@ enableComments: true # for Gisqus
 
 Nest.js CLI는 프로젝트를 생성하고, 모노레포 구조를 손쉽게 구성할 수 있는 명령어를 제공합니다.
 
-모노레포 구성을 시작하기 전에, 시스템에 Nest.js CLI가 설치되어 있어야 합니다. CLI 설치는 다음과 같은 명령어로 수행할 수 있습니다
+모노레포 구성을 시작하기 전에, Nest.js CLI가 설치되어 있어야 합니다.<br />
+CLI 설치는 다음과 같은 명령어로 수행할 수 있습니다
 
 ```bash title="Nest.js CLI 설치"
 npm install -g @nestjs/cli
@@ -28,42 +29,74 @@ npm install -g @nestjs/cli
 yarn global add @nestjs/cli
 ```
 
-## 모노레포 구성 시작하기
+---
 
-1. **새 워크스페이스 생성**: 먼저, 새 Nest.js 워크스페이스를 생성합니다. 워크스페이스는 모노레포를 구성하는 데 사용될 최상위 폴더입니다.
+## Nest.js CLI를 사용한 워크스페이스 생성
 
-```bash
-nest new workspace-name --monorepo
-```
+먼저, 새로운 Nest.js 워크스페이스를 생성합니다.<br />
 
-여기서 `workspace-name`은 워크스페이스의 이름입니다.
-
-2. **애플리케이션 추가**: 워크스페이스 내부에서 다수의 Nest.js 애플리케이션을 생성할 수 있습니다. 애플리케이션을 추가하려면 다음 명령어를 사용합니다
+> **워크스페이스(work-space)**: nest에서 모노레포를 구성하는 데 사용될 최상위 폴더입니다.
 
 ```bash
-nest generate app app-name
+nest new nest-mono
 ```
 
-`app-name`은 추가하려는 애플리케이션의 이름입니다.
+위 코드에서 `nest-mono`는 워크스페이스의 이름입니다.
 
-3. **라이브러리 추가**: 워크스페이스 내부 여러 앱들의 공통 기능을 재사용하기 위한 라이브러리를 추가할 수도 있습니다. 라이브러리를 추가하려면 다음 명령어를 실행합니다
+워크스페이스를 생성했으니, 이제 사용할 애플리케이션과 라이브러리를 추가할 수 있습니다.
 
 ```bash
-nest generate library lib-name
+> cd nest-mono
+
+# 애플리케이션 추가
+> nest g app admin
+> nest g app post
+
+# 라이브러리 추가
+> nest g lib entity
 ```
 
-`lib-name`은 생성하려는 라이브러리의 이름입니다.
+위 코드에서 `admin`, `post`, `entity`는 각각 추가하려는 애플리케이션과 라이브러리의 이름입니다.
 
-## 프로젝트 구조 및 빌드
+위의 명령어를 통해서 워크스페이스 내부에 apps와 libs 폴더가 생성되며, 각각의 애플리케이션과 라이브러리가 추가됩니다.
+
+- **apps**: 별도로 배포가 가능한 애플리케이션을 저장하는 폴더 <br />
+- **libs**: apps에서 공유하는 라이브러리를 저장하는 폴더, apps에서 libs의 모듈을 의존성 주입받아 사용할 수 있습니다.
+
+워크스페이스의 구조는 다음과 같습니다
+
+![](./images/monorepo-img.png)
+
+---
+
+## 기존 생성한 프로젝트 제거
+
+`nest g app app-name`, `nest g lib lib-name` 명령어를 통해 생성한 apps와 libs 폴더를 사용해서 모노레포 구조를 구성했으므로, 기존에 `nest new nest-mono`명령어를 사용해서 생성한 프로젝트를 제거합니다.
+
+기존의 프로젝트를 제거한 후, **_nest-cli.json_** 파일을 열어서 `projects` 속성 안의 "nest-mono"를 제거합니다.
+
+```json title="nest-cli.json에서 제거 할 부분"
+"nest-mono": {
+  "type": "application",
+  "root": "apps/nest-mono",
+  "entryFile": "main",
+  "sourceRoot": "apps/nest-mono/src",
+  "compilerOptions": {
+    "tsConfigPath": "apps/nest-mono/tsconfig.app.json"
+  }
+},
+```
+
+## 프로젝트 빌드 및 실행
 
 모노레포 구조에서는 각 애플리케이션과 라이브러리가 독립적으로 빌드 및 실행 될 수 있습니다.
 
-프로젝트의 루트에서 다음 명령어를 사용하여 특정 애플리케이션을 빌드할 수 있습니다
+프로젝트의 루트에서 다음 명령어를 사용하여 특정 애플리케이션을 빌드하거나, 실행할 수 있습니다.
 
 ```bash
-nest build app-name
+> nest build admin
 
-nest start app-name
+> nest start admin
 ```
 
 또한, 모든 애플리케이션과 라이브러리를 한 번에 빌드하는 것도 가능합니다
@@ -74,4 +107,7 @@ nest build
 
 ## 결론
 
-Nest.js CLI를 사용하여 모노레포 구조를 설정하는 것은 대규모 프로젝트 관리를 간소화하고, 코드 재사용성을 높이는 데 큰 도움이 됩니다. 이 글을 통해 Nest.js를 사용한 모노레포 구성의 기본적인 방법을 이해하고, 자신만의 프로젝트에 적용해 볼 수 있기를 바랍니다.
+Nest.js CLI를 사용하여 모노레포 구조를 구성하는 방법에 대해 알아보았습니다. <br />
+모노레포 구조를 사용하면 여러 프로젝트의 코드를 한 개의 저장소에서 관리할 수 있어, 효율적인 코드 관리와 협업을 가능하게 합니다.
+
+다음 글에서는 TypeORM을 사용하여 애플리케이션과 라이브러리 간의 데이터베이스 연결을 설정하는 방법에 대해 알아보겠습니다.
